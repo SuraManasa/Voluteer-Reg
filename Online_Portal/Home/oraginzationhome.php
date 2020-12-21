@@ -6,36 +6,19 @@
         <link href="../css/bootstrap.css" rel="stylesheet">
     </head>
     <body>
-    <div class="container">
-        <div class="page-header" style="height:60px;">
-            <h1></h1>
-        </div>
-        <div class="bs-component">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><h5> <strong>Home</strong></h5>
-                    </a>
-                </li>
-            </div>
-            </nav> 
-        </div>      
+    <?php include '../template/template.php'; ?>
+    <div class="container">     
         <?php 
         echo '<h1>';
         echo $_SESSION["organisation"];
         echo ' - Shifts </h1>';
         ?>
         <form action="editshifts.php" method="POST">
-              <button type="submit" class="btn btn-lg signin-button">EDIT SHIFTS</button>
+              <button type="submit" class="btn btn-secondary signin-button">EDIT SHIFTS</button>
         </form>
         <h2>Registered Shifts</h2>
-        <table style="width:100%">
-        <tr>
+        <table class="table-bordered table table-hover" style="width:100%">
+        <tr class="table-primary">
             <th>Name</th>
             <th>Type</th>
             <th>Filled slots</th>
@@ -43,8 +26,8 @@
             <th>Start Time</th>
             <th>Location</th>
 
-        </tr>
-        <?php 
+        </tr> <!-- table header end -->
+        <?php  // table body starts 
         $organisation = $_SESSION["organisation"];
         $conn = new mysqli("localhost", "root", "","volunteer_registration");
 
@@ -55,10 +38,10 @@
         $result=$conn->query($sql);
          if($result->num_rows)
          {
-            while($row = $result->fetch_assoc())
+            while($row = $result->fetch_assoc()) // to return table rows individually
             {
-                $shiftid = $row['shift_id'];
-            echo '<tr>';
+                $shiftid = $row['shift_id']; // fetching shift id from the register shifts db
+            echo '<tr class="table-light">';
             echo '<td>' ;
             echo $row['name'];
             echo '</td>';
@@ -94,8 +77,8 @@
         ?>
     </table>
         <h2>Available Shifts</h2>
-        <table style="width:100%">
-        <tr>
+        <table class="table-bordered table table-hover" style="width:100%">
+        <tr class="table-primary">
             <th>Type</th>
             <th>Available slots</th>
             <th>Date</th>
@@ -116,12 +99,12 @@
          {
             while($row = $result->fetch_assoc())
             {
-            echo '<tr>';
+            echo '<tr class="table-light">';
             echo '<td>' ;
             echo $row['Type'] ;
             echo '</td>';
             echo '<td>' ;
-            echo $row['available_slots'] ;
+            echo $row['available_slots'] ; //fetching from db which will be populated by addshifts.php
             echo '/';
             echo $row['Max_Slots'];
             echo '</td>';

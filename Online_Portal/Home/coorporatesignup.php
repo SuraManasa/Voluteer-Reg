@@ -14,7 +14,7 @@ $conn = new mysqli("localhost", "root", "","volunteer_registration");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-$firstname=$_POST["firstname"];
+$firstname=$_POST["firstname"]; // to get first name from html file from text box
 $lastname=$_POST["lastname"];
 $username=$_POST["username"];
 $email=$_POST["email"];
@@ -22,7 +22,7 @@ $password=$_POST["password"];
 $corporationname=$_POST["corporationname"];
 $sql = "insert into user_login(First_Name,Last_Name,UserName,Email,Password,Corporation_Name) values('$firstname','$lastname','$username','$email','$password','$corporationname')";
 $res=$conn->query($sql);
-header("location:login.html");
+header("location:login.html"); // auto navigate      
 
 
 

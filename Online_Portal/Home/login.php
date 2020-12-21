@@ -15,19 +15,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "select * from user_login where UserName='$username';";
+$sql = "select * from user_login where UserName='$username';"; // fetching all details of the user
+
+
 $result=$conn->query($sql);
 if($result->num_rows)
 {  
-$pass=$result->fetch_assoc();
+$pass=$result->fetch_assoc(); // fetches complete row of matched user name
 if($password==$pass['Password'])
 {
-    $_SESSION["username"]=$username;
-    echo $pass['Corporation_Name'];
-    echo $pass['Organization_Name'];
-    if($pass['Corporation_Name']){
+    $_SESSION["username"]=$username; // set session variables for user
+    //echo $pass['Corporation_Name'];
+    //echo $pass['Organization_Name'];
+    if($pass['Corporation_Name']){ // check if its corporate user or not from data base 
         $_SESSION["corporation"]=$pass['Corporation_Name'];
-        header("location:corporatehome.php");
+        header("location:corporatehome.php"); //re-direct to corporate home
     } else if($pass['Organization_Name']) {
         $_SESSION["organisation"]=$pass['Organization_Name'];
         header("location:oraginzationhome.php");

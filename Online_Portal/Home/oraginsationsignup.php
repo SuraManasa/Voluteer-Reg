@@ -14,7 +14,7 @@ $conn = new mysqli("localhost", "root", "","volunteer_registration");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-$firstname=$_POST["firstname"];
+$firstname=$_POST["firstname"]; //fetches the firstname from the html form
 $lastname=$_POST["lastname"];
 $username=$_POST["username"];
 $email=$_POST["email"];

@@ -6,7 +6,7 @@ $date = $_POST["date"];
 $time=$_POST["time"];
 $location = $_POST["location"];
 $registeredslots = $_POST["registeredslots"];
-$available_slots = $maxslots - $registeredslots;
+$available_slots = $maxslots - $registeredslots; // after  editing
 $conn = new mysqli("localhost", "root", "","volunteer_registration");
 
 if ($conn->connect_error) {

@@ -24,5 +24,5 @@ $res=$conn->query($sql);
 header("location:login.html");
 
 
-
+ 
 ?>

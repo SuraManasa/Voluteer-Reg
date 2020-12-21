@@ -8,83 +8,78 @@ session_start();
         <link href="../css/bootstrap.css" rel="stylesheet">
     </head>
     <body>
-    <div class="container">
-        <div class="page-header" style="height:60px;">
-            <h1></h1>
-        </div>
-        <div class="bs-component">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><h5> <strong>Home</strong></h5>
-                    </a>
-                </li>
-            </div>
-            </nav> 
-        </div>      
-        <h1>Register</h1>
+    <?php include '../template/template.php'; ?>
+    <div class="container">   
+        <h1 class="text-info">Register</h1>
         <?php 
         $conn = new mysqli("localhost", "root", "","volunteer_registration");
 
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         } 
-        $id=$_POST["id"];
-        $sql = "select * from shifts where id = '$id';";
+        $id=$_POST["id"];  
+        $sql = "select * from shifts where id = '$id';";// fetches entire row matching with the ID in data base 
         $result=$conn->query($sql);
          if($result->num_rows)
          {
             echo'<form action="completeregistration.php" method="POST">';
             while($row = $result->fetch_assoc())
             {
-            echo '<div>';
-            echo '<span> Register For:';
+            echo '<div class="row">';
+            echo '<label for="staticRegisterFor" class="col-sm-2 col-form-label">Register For:</label>';
+            echo '<div class="col-sm-10">';
+            echo '<input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="';
             echo $row['Organization_Name'];
-            echo '</span>';
+            echo '">';
             echo '</div>';
-            echo '<div>';
-            echo '<span> Date:';
+            echo '</div>';
+
+            echo '<div class="row">';
+			echo '<label for="staticDate" class="col-sm-2 col-form-label">Date:</label>';
+            echo '<div class="col-sm-10">';
+            echo '<input type="text" readonly="" class="form-control-plaintext" id="staticDate" value="';
             echo $row['Date'];
-            echo '</span>';
+            echo '">';
             echo '</div>';
-            echo '<div>';
-            echo '<span> Start Time:';
+            echo '</div>';
+
+            echo '<div class="row">';
+            echo '<label for="staticTime" class="col-sm-2 col-form-label">Start Time:</label>';
+            echo '<div class="col-sm-10">';
+            echo '<input type="text" readonly="" class="form-control-plaintext" id="staticTime" value="';
             echo $row['Time'];
-            echo '</span>';
+            echo '">';
             echo '</div>';
-            echo '<div>';
-            echo '<span> Type of Work:';
+            echo '</div>';
+
+            echo '<div class="row">';
+            echo '<label for="staticType" class="col-sm-2 col-form-label">Type of Work:</label>';
+            echo '<div class="col-sm-10">';
+            echo '<input type="text" readonly="" class="form-control-plaintext" id="staticType" value="';
             echo $row['Type'];
-            echo '</span>';
+            echo '">';
+            echo '</div>';
             echo '</div>';
         }
          }
         ?>
-         <div class="form-group">
-                <div>First Name</div>      
-                <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Enter First Name">
-              </div>
-              <div class="form-group">
-                <div>Last Name</div>
-                <input type="text"name="lastname" id="lastname" class="form-control"  placeholder="Enter Last Name">
-              </div>
-              <div class="form-group">
-                <div>Email</div>
-                <input type="text"name="email" id="email" class="form-control"  placeholder="Enter Your Email">
-              </div>
-              <div class="form-group">
-                <div>Phone Number</div>
-                <input type="text"name="username" id="username" class="form-control"  placeholder="Enter phone number">
-              </div>
-              <div>
-                <span> Volunteer Start Time</span>
+        <div class="form-group">
+                <label class="col-form-label" for="inputDefault">First Name</label>
+                <input type="text" name="firstname" id="firstname" class="form-control" style="width: 300px;" placeholder="Enter First Name">
+
+                <label class="col-form-label" for="inputDefault">Last Name</label>
+                <input type="text"name="lastname" id="lastname" class="form-control" style="width: 300px;" placeholder="Enter Last Name">
+
+                <label class="col-form-label" for="inputDefault">Email</label>
+                <input type="text"name="email" id="email" class="form-control" style="width: 300px;" placeholder="Enter Your Email">
+
+                <label class="col-form-label" for="inputDefault">Phone Number</label>
+                <input type="text"name="username" id="username" class="form-control" style="width: 300px;" placeholder="Enter phone number">
+
+                <label class="col-form-label" for="inputDefault">Volunteer Start Time </label>
                 <input type="time"name="time" id="time">
-            </div>
+              </div>
+
             <?php 
             echo '<button type="submit"  name="id" value= ';
             echo $_POST["id"];
@@ -92,7 +87,7 @@ session_start();
             echo '</button>';
             echo '</form>'
             ?>
-    </div>
+        </div>
     </body>
 
 </html>
